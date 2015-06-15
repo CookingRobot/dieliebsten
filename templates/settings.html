@@ -1,0 +1,168 @@
+
+
+
+{% extends 'layout.html' %}
+{% block title %}DieLiebsten - Einstellungen{% endblock %}
+
+
+  {% block content %}
+
+
+  <div class="header">
+	  <a href="/"><h1>Die liebsten</h1></a>
+	  <h2>Willkommen {{name}}</h2>
+ </div>	  
+
+
+
+
+<div class="wrapper">
+	
+	<a class="button backButton" href="/"><i class="icon-arrow-left"></i>Zurück</a>
+	<div class="clear"></div>
+</div>
+
+
+<div class="wrapper">
+	<h1 class="headerButton">Persönliche Daten:</h1>
+
+	<a class="button mainMenu" href="/feedback"><i class="icon-comments"></i>Feedback</a>
+	<div class="clear"></div>
+</div>
+
+<div class="wrapper">
+	
+	
+	<div class="wrap">
+		<h3 class="indentedHeader">Mail Adresse ändern:</h3>
+		<form action="/changemail" name="changemail">
+			<input type="text" name="theMail" value="{{mail}}" class="input standardInput indentedHeader" placeholder="Neue E-Mail Adresse"><br>
+			<input type="password" name="thePwd" class="input standardInput indentedHeader" placeholder="Passwort">
+			<input type="hidden" name="theName" value="{{name}}"><br>
+			<input type="submit" value="Ändern" class="button standartButton indentedHeader">
+		</form>
+		<div id="error2Con" class="hidden">
+			 <p class="error standartError" id="error2"></p>
+		</div>		
+	</div>
+	
+	<div class="wrap">
+		<h3 class="indentedHeader">Passwort ändern:</h3>
+		<form action="/changepwd" name="changepwd">
+			<input type="password" name="pwd"class="input standardInput indentedHeader" placeholder="Altes Passwort"><br>
+			<input type="password" name="pwd1"class="input standardInput indentedHeader"placeholder="Neues Passwort"><br>	
+			<input type="password" name="pwd2"class="input standardInput indentedHeader"placeholder="Neues Passwort">
+		    <input type="hidden" name="theName" value={{name}}><br>
+			<input type="submit" value="Ändern" class="button standartButton indentedHeader">
+		</form>
+		<div id="error3Con" class="hidden" style="height:70px">
+		 	<p class="error standartError" id="error3"></p>
+		</div>	
+	
+	</div>
+	<div class="clear"></div>
+</div>
+
+
+<div class="wrapper">
+	<div class="wrap">
+			<h3>Account löschen:</h3>
+			<form action="/deleteaccount" name="deleteaccount">
+		 	   <input type="hidden" name="theName" value="{{name}}">
+				<input type="password" name="thePwd"class="input standardInput indentedHeader" placeholder="Passwort"><br>
+				<button type="submit"class="button invertedButton standartButton indentedHeader ">Löschen</button>
+			</form>	
+			<div id="error4Con" class="hidden" style="height:70px">
+		 		<p class="error standartError" id="error4"></p>
+			</div>	
+	</div>
+
+	<div class="wrap">
+				<h3>Eine nette Mail bekommen:</h3>
+			<form action="/sendmail" name="sendmail">
+		 	   <input type="hidden" name="theName" value="{{name}}">
+				<!--<button type="submit"class="button standartButton indentedHeader " id="mailButton">	Ja, ich wil.</button>
+-->
+				<button  type="submit" id="mailButton" class="ladda-button button standartButton indentedHeader" data-style="expand-right">
+				<span class="ladda-label">Ja, ich will.</span>
+				</button>
+
+
+
+
+			</form>	
+			<div style="overflow: hidden;width: 284px;margin-left: 20px;" id="loaderContainer" class="hidden">
+				<div id="loadingProgressG" class="loadingProgressG"></div>
+			</div>
+			<div id="error5Con" class="hidden" style="height:70px">
+		 		<p class="error standartError" id="error4"></p>
+			</div>	
+	</div>
+
+	<div class="clear"></div>
+</div>
+
+<script>
+var bussy=false;
+$('form[name=newlist]').submit(function(){
+		document.getElementById("error1Con").className = "hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	if(res.error.length==0){ location.reload();}
+	    document.getElementById("error1").innerHTML = res.error;
+        document.getElementById("error1Con").className = "animated shake";
+    });
+    return false;
+});
+$('form[name=changemail]').submit(function(){
+		document.getElementById("error2Con").className = "hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	if(res.error.length==0) {location.reload();}
+        document.getElementById("error2").innerHTML = res.error;
+         document.getElementById("error2Con").className = "animated shake";
+    });
+    return false;
+});
+$('form[name=changepwd]').submit(function(){
+		document.getElementById("error3Con").className = "hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	if(res.error.length==0) {location.reload();}
+        document.getElementById("error3").innerHTML = res.error;
+         document.getElementById("error3Con").className = "animated shake";
+    });
+    return false;
+});
+$('form[name=deleteaccount]').submit(function(){
+		document.getElementById("error4Con").className = "hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	if(res.error.length==0) {window.location = "/logout";}
+        document.getElementById("error4").innerHTML = res.error;
+         document.getElementById("error4Con").className = "animated shake";
+    });
+    return false;
+});
+$('form[name=sendmail]').submit(function(){
+		document.getElementById("error5Con").className = "hidden";
+   		var l = Ladda.create( document.querySelector( '#mailButton' ) );
+		l.start();
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	if(res.error.length>0) {
+ 		document.getElementById("error5").innerHTML = res.error;
+        document.getElementById("error5Con").className = "animated shake";
+    	}
+    	l.stop();
+    });
+    return false;
+});
+function removeClass(node, cls) {
+    if(node && node.className && node.className.indexOf(cls) >= 0) {
+        var pattern = new RegExp('\\s*' + cls + '\\s*');
+        node.className = node.className.replace(pattern, ' ');
+    }
+}
+</script>
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,84 @@
+
+
+
+{% extends 'layout.html' %}
+
+{% block title %}DieLiebsten - Feedback{% endblock %}
+
+  {% block content %}
+
+
+  <div class="header">
+	  <a href="/"><h1>Die liebsten</h1></a>
+	  <h2>Willkommen {{name}}</h2>
+ </div>	  
+
+
+
+
+<div class="wrapper">
+	<a class="button backButton" href="/einstellungen"><i class="icon-arrow-left"></i>Zurück</a>
+	<div class="clear"></div>
+</div>
+
+
+<div class="wrapper">
+	<div class="wrap"> 
+	<i class="icon-comments mainIcon" style="font-size:200px;"></i><br>
+	</div>
+	<div class="wrap"> 
+
+	<h2 style="white-space:normal; line-height:150%;">Jetzt mal Hand aufs Herz:<br> Wie gefällt dir dieliebsten.de ?</h2><br>
+	<form action="/sendfeedback" name="sendfeedback">
+		<textarea class="input feedbackInput" name="content"></textarea>
+		<!--<input type="submit" value="Senden" class="button feedbackButton">-->
+
+			<button  id="submit" class="ladda-button button mainFormButton invertedButton" data-style="expand-right"><span class="ladda-label">Senden</span></button>
+
+
+
+	</form>
+	<div id="error1Con" class="hidden" style="height:70px">
+		 <p class="error standartError" id="error1"></p>
+	</div>
+
+		<div class="clear"></div>
+
+	</div>
+	
+		    
+</div>
+
+
+<script>
+$('form[name=sendfeedback]').submit(function(){
+		var l = Ladda.create( document.querySelector( 'button' ) );
+		l.start();
+		 document.getElementById("error1Con").className = "hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	l.stop();
+    	if(res.error.length==0){ window.location = "/";}
+	    document.getElementById("error1").innerHTML = res.error;
+        document.getElementById("error1Con").className = "animated shake";
+    });
+    return false;
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

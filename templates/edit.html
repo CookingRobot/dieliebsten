@@ -1,0 +1,96 @@
+
+
+
+{% extends 'layout.html' %}
+{% block title %}DieLiebsten - Bearbeiten{% endblock %}
+
+
+  {% block content %}
+
+
+  <div class="header">
+	  <a href="/"><h1>Die liebsten</h1></a>
+	  <h2>Willkommen {{name}}</h2>
+ </div>	  
+
+
+
+
+<div class="wrapper">
+	<a class="button backButton" href="javascript: history.go(-1)">Abbrechen</a>
+	<div class="clear"></div>
+</div>
+<div class="wrapper">
+	<h2>Deine Liste <q>{{ title }}</q> ändern:</h2><br>
+	<form action="/editlist" name="editlist">
+	    <input type="hidden" name="theName" value="{{name}}">
+	    <input type="hidden" name="theTitle" value="{{title}}">
+
+		<div id="draggers">
+  		<div class="dragger" draggable="true" >
+ 			<input type="text" name="placeOne" class="input newListInput " placeholder="Platz 1"value="{{ data[0] }}">
+ 			<i class="icon-reorder"></i>
+  		</div>
+		<div class="dragger" draggable="true">
+ 			<input type="text" name="placeTwo" class="input newListInput " placeholder="Platz 2"value="{{ data[1] }}">
+ 			 <i class="icon-reorder"></i>
+
+  		</div>
+  		<div class="dragger" draggable="true">
+ 			<input type="text" name="placeThree" class="input newListInput " placeholder="Platz 3"value="{{ data[2] }}">
+ 			 <i class="icon-reorder" ></i>
+
+  		</div>
+  		<div class="dragger" draggable="true">
+ 			<input type="text" name="placeFour" class="input newListInput " placeholder="Platz 4"value="{{ data[3] }}">
+ 			 <i class="icon-reorder"></i>
+
+  		</div>
+  		<div class="dragger" draggable="true">
+ 			<input type="text" name="placeFive" class="input newListInput " placeholder="Platz 5"value="{{ data[4] }}">
+ 			<i class="icon-reorder"></i>
+  		</div>
+  		</div>
+  		<script type="text/javascript" src="../public/js/dnd_order.js"></script>
+
+
+		<input type="submit" value="Speichern" class="button newListInput newListInputBig">
+	</form>
+	<div id="error1Con" class="hidden" style="height:70px">
+		 <p class="error standartError" id="error1"></p>
+	</div>
+
+	
+		    
+</div>
+
+
+<script>
+$('form[name=editlist]').submit(function(){
+		 document.getElementById("error1Con").className = "hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	if(res.error.length==0){ window.location = "/";}
+	    document.getElementById("error1").innerHTML = res.error;
+        document.getElementById("error1Con").className = "animated shake";
+    });
+    return false;
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

@@ -1,0 +1,81 @@
+
+
+
+
+{% extends 'layout.html' %}
+{% block title %}DieLiebsten - Dein Leben in Bestenlisten{% endblock %}
+
+
+  {% block content %}
+
+
+  <div class="header">
+	  <a href="/"><h1>Die liebsten</h1></a>
+	  <h2>Dein Leben in Bestenlisten</h2>
+ </div>	  
+
+
+
+
+<div class="wrapper">
+	
+	<a class="button backButton" href="/"><i class="icon-arrow-left"></i>Zurück</a>
+	<div class="clear"></div>
+</div>
+ 
+ <div class="wrapper">
+
+	<div class="wrap"> 
+	    <h2 class="indentedForm">Passwort vergessen:</h2>
+	   		 <form name="forgot" action="/vergessen">
+	   		 	<input type="text" name="theMail"class="input mainFormInput" placeholder="Mail Adresse"><br>
+	   		 	<input type="text" name="theName"class="input mainFormInput" placeholder="Benutzername"><br>
+
+				<button  id="submit" class="ladda-button button mainFormButton invertedButton" data-style="expand-right"><span class="ladda-label">Neues Passwort</span></button>
+
+	   			<!-- 	<button id="submit" class="ladda-button"  data-style="slide-up">Neues Passwort</button>
+
+	   		 <input type="submit" value="Neues Passwort" class="button mainFormButton invertedButton" id="submit"><br>-->
+
+	   		 </form>	
+	   		 <br>
+	   		 <div id="error1Con" class="hidden">
+		 		<span class="error mainError" id="error1"></span>
+			</div>
+	</div>
+	<div class="wrap"> 
+	<i class="icon-envelope mainIcon" style="font-size:68px;"></i><br><p>Du erhälst eine E-Mail mit einem Link. Mit diesem kannst du dir ein neues Passwort anlegen. Bitte beachten das der Link nur wenige Minuten gültig ist.</p></div>
+	
+	<div class="clear"></div>
+
+ </div>
+ <div class="wrapper">
+ 	<div class="clear" style="padding-bottom:100px"></div>
+
+ </div>
+
+<script>
+
+$('form[name=forgot]').submit(function(){
+		var l = Ladda.create( document.querySelector( 'button' ) );
+		l.start();
+    	document.getElementById("error1Con").className = "hidden";
+    	//document.getElementById("submit").className="hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	l.stop();
+    	if(res.error.length==0) {window.location = "/";}
+        document.getElementById("error1").innerHTML = res.error;
+        document.getElementById("error1Con").className = "animated shake";
+       // document.getElementById("submit").className="button mainFormButton invertedButton";
+
+    });
+    return false;
+});
+</script>
+
+
+
+
+
+
+{% endblock %}

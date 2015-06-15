@@ -1,0 +1,46 @@
+
+
+{% extends 'layout.html' %}
+{% block title %}DieLiebsten - Neuigkeiten{% endblock %}
+
+
+  {% block content %}
+
+
+
+
+  <div class="header">
+	  <a href="/"><h1>Die liebsten</h1></a>
+	  <h2>Willkommen {{name}}</h2>
+ </div>	  
+
+
+
+
+<div class="wrapper">
+	<a class="button backButton" href="/"><i class="icon-arrow-left"></i>Zurück</a>
+	<div class="clear"></div>
+</div>
+
+
+<div class="wrapper">
+	<h2>Was andere Nutzer so machen:</h2>
+
+		<ul class="noBulltes">
+			{% for item in items %}
+						{% if item[0] == 'person' %}
+							<p class="showList"><i class="icon-user"></i> <a href="{{ item[2] }}"><b>{{item[1]}}</b></a> hat sich angemeldet</p>
+						{% endif %}
+						{% if item[0] == 'list' %}
+							<p class="showList"><i class="icon-reorder"></i> <a href="{{ item[4] }}">{{item[2]}}</a> hat die Liste <a href="{{ item[3] }}"><b>{{item[1]}}</b></a> erstellt.</p>
+						{% endif %}
+			{% endfor %}
+			{% if items.length ==0 %}<h3>Noch keine Listen!</h3>{% endif %}
+
+			</div>
+		</ul>
+
+			
+	
+
+{% endblock %}

@@ -1,0 +1,49 @@
+
+
+{% extends 'layout.html' %}
+
+{% block title %}DieLiebsten - {{ rank[0]}} von {{name}}{% endblock %}
+
+
+  {% block content %}
+		<a href="/" class="button register">
+ 			 {% if sid.length>2%}
+ 			 Dein Profil
+ 			  {% else %}
+ 			   Jetzt Anmelden
+			{% endif %}
+  		</a>	
+			
+		<div class="header showHeader"><h1> <a href="/">Die Liebsten</a></h1></div>
+
+
+		<div class="wrapper">
+			<h2 class=" showTitle"><b>{{name}}</b> trägt hier Listen ein.<br>
+			Besuche alle <b><a href="{{url}}">Listen!</a></b></h2>
+
+			
+
+
+
+			<div class="oneList">
+			<h3 class="showTitleSmall">{{ rank[0]}}</h3>
+	
+					<ol>
+						<li class="realItem">{{rank[1][0]}}</li>
+						<li class="realItem">{{rank[1][1]}}</li>
+						<li class="realItem">{{rank[1][2]}}</li>
+						<li class="realItem">{{rank[1][3]}}</li>
+						<li class="realItem">{{rank[1][4]}}</li>
+					</ol>	
+			</div>
+
+
+		<div class="clear"></div>
+		</div>
+  		
+  	
+
+		
+
+{% endblock %}
+

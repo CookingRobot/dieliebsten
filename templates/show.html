@@ -1,0 +1,64 @@
+
+
+{% extends 'layout.html' %}
+
+{% block title %}DieLiebsten - Listen von {{name}}{% endblock %}
+
+  {% block content %}
+
+
+		<a href="/" class="button register">
+ 			 {% if sid.length>2%}
+ 			 Dein Profil
+ 			  {% else %}
+ 			   Jetzt Anmelden
+			{% endif %}
+  		</a>
+	 
+			
+		<div class="header showHeader"><h1> <a href="/">Die Liebsten</a></h1></div>
+
+		
+		<script>
+		window.onload = function () {
+		document.getElementById('fb').href="http://www.facebook.com/sharer/sharer.php?u="+document.URL+"&t=Ich sammle Top 5 Listen auf DieLiebsten";
+		document.getElementById('twitter').href="http://twitter.com/intent/tweet?text=Ich sammle Top 5 Listen auf: "+document.URL;
+	}
+		</script>
+
+
+		<div class="wrapper">
+			<h2 class="headerButton showTitle " style="line-height:140%!important"><b>{{name}}</b> hat <br> 
+			<b>{{ ranks.length }} 
+				  {% if ranks.length==1%}Liste {% else %}Listen {% endif %}</b> erstellt:</h2>
+			
+		    {% if ranks.length>0%}
+				<a class="button mainMenu" id="fb"  style="text-decoration:none"><i class="icon-facebook"></i>Facebook</a>
+				<a class="button mainMenu" id="twitter" style="text-decoration:none"><i class="icon-twitter"></i>Twitter</a>
+	  	  	{% else %}
+	 	 	{% endif %}
+	
+			
+			<div class="clear"></div>
+			
+
+		<ul class="noBulltes">
+			{% for rank in ranks %}
+						<div class="oneList">
+			<a class="showTitleSmall" href={{ rank[2] }}>{{ rank[0]}}</a><br>
+					<ol>
+						<li class="realItem">{{rank[1][0]}}</li>
+						<li class="realItem">{{rank[1][1]}}</li>
+						<li class="realItem">{{rank[1][2]}}</li>
+						<li class="realItem">{{rank[1][3]}}</li>
+						<li class="realItem">{{rank[1][4]}}</li>
+					</ol>	
+								</div>
+
+			{% endfor %}
+			<div class="spacer"></div>	
+			</div>
+		</ul>
+	
+
+{% endblock %}

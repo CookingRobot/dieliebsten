@@ -1,0 +1,135 @@
+
+
+
+{% extends 'layout.html' %}
+
+{% block title %}DieLiebsten - Dein Leben in Bestenlisten{% endblock %}
+
+  {% block content %}
+
+
+  <div class="header">
+	  <a href="/"><h1>Die liebsten</h1></a>
+	  <h2>Willkommen {{name}}</h2>
+ </div>	  
+
+
+
+
+<div class="wrapper">
+		<h1 class="headerButton">Dein Dashboard:</h1>
+		<a class="button invertedButton mainMenu " href="/logout"><i class="icon-off"></i>Logout</a>
+		<a class="button mainMenu" href="/einstellungen"><i class="icon-cog"></i>Einstellungen</a>
+		<a class="button mainMenu" href="/neuigkeiten"><i class="icon-time"></i> Neuigkeiten</a>
+		<div class="clear"></div>
+</div>
+
+<div class="wrapper">
+		<h2>Neue Liste:</h2>
+		<form action="/newlist" name="newlist">
+	   		<input type="hidden" name="theName" value="{{name}}">
+			<input type="text" name="title" class="input newListInput newListInputBig" placeholder="Name der Liste"><br>
+
+
+				<div id="draggers">
+  		<div class="dragger" draggable="true" >
+ 			<input type="text" name="placeOne" class="input newListInput " placeholder="Platz 1">
+ 			<i class="icon-reorder"></i>
+  		</div>
+		<div class="dragger" draggable="true">
+ 			<input type="text" name="placeTwo" class="input newListInput " placeholder="Platz 2">
+ 			 <i class="icon-reorder"></i>
+
+  		</div>
+  		<div class="dragger" draggable="true">
+ 			<input type="text" name="placeThree" class="input newListInput " placeholder="Platz 3">
+ 			 <i class="icon-reorder" ></i>
+
+  		</div>
+  		<div class="dragger" draggable="true">
+ 			<input type="text" name="placeFour" class="input newListInput " placeholder="Platz 4">
+ 			 <i class="icon-reorder"></i>
+
+  		</div>
+  		<div class="dragger" draggable="true">
+ 			<input type="text" name="placeFive" class="input newListInput " placeholder="Platz 5">
+ 			<i class="icon-reorder"></i>
+  		</div>
+  		</div>
+
+
+			<input type="submit" value="Speichern" class="button newListInput newListInputBig">
+		</form>
+		<div class="spacer">
+			<div id="error1Con" class="hidden">
+		 	<p class="error mainError newListError" id="error1"> </p>
+		 </div>	
+		</div>
+		  		<script type="text/javascript" src="../public/js/dnd_order.js"></script>
+
+	<div class="clear"></div>
+</div>
+
+<div class="wrapper">
+	<h2 class="headerButton">Deine Listen:</h2>
+	<a class="button mainMenu biggerMenuButton" href="{{url}}"><i class="icon-share-sign"></i>Dein öffentliches Profil</a>
+	<div class="clear"></div>
+</div>	
+<div class="wrapper">
+{% for rank in ranks %}
+	<div class="editList" >
+	    <h4>{{ rank[0]}}</h4>
+		<form action="/bearbeiten" method="post">
+		    <input type="hidden" name="theName" value="{{name}}">
+		    <input type="text" name="theTitle" value="{{rank[0]}}" style="display:none">
+			<button type="submit"class="button editListButton"><i class="icon-edit"></i> Bearbeiten</button>
+		</form>
+		<form action="/visitlist" method="post">
+		    <input type="hidden" name="theName" value="{{name}}">
+		    <input type="text" name="theTitle" value="{{rank[0]}}" style="display:none">
+			<button type="submit"class="button editListButton"><i class="icon-share-sign"></i> Anzeigen</button>
+		</form>
+		<form action="/deletelist" method="post">
+		    <input type="hidden" name="theName" value="{{name}}">
+		    <input type="text" name="theTitle" value="{{rank[0]}}" style="display:none">
+			<button type="submit"class="button invertedButton editListButton"><i class="icon-remove"></i> Löschen</button>
+		</form>
+	</div>	
+		{% endfor %}
+	{% if ranks.length==0 %}
+	  <h3 style="font-weight: 400;">Du hast noch keine Listen. Wenn du nicht weißt worüber du eine Liste schreiben möchtest, dann schau was andere Nutzer so machen. Dazu einfach auf Neuigkeiten rechts oben klicken. Alternativ fang mit deinem Lieblingsessen oder deiner Lieblingsmusik an. <br></h3>
+ {% endif %}
+	<div class="spacer"></div>
+	<div class="clear"></div>
+</div>
+
+
+
+
+
+
+<script>
+$('form[name=newlist]').submit(function(){
+		document.getElementById("error1Con").className = "hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	if(res.error.length==0){ location.reload();}
+	    document.getElementById("error1").innerHTML = res.error;
+        document.getElementById("error1Con").className = "animated shake";
+    });
+    return false;
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

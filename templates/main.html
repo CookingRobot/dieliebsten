@@ -1,0 +1,115 @@
+
+
+
+
+{% extends 'layout.html' %}
+{% block title %}DieLiebsten - Dein Leben in Bestenlisten{% endblock %}
+
+
+  {% block content %}
+
+
+  <div class="header">
+	  <a href="/"><h1>Die liebsten</h1></a>
+	  <h2>Dein Leben in Bestenlisten</h2>
+ </div>	  
+
+
+
+
+ 
+ <div class="wrapper">
+	<div class="wrap"> <p>Mit <b>DIE LIEBSTEN</b> erstellst du Top-Fünf Listen von Allem. Von deinem Lieblingskartoffelschäler bis zum Traumjob. Dich anzumelden ist so einfach wie Schnürsenkel binden und es gibt eine Menge Gründe das zu tun. Das ganze ist <b>kostenlos</b>, super <b>einfach</b>, <b>sieht toll aus</b> und macht eine Menge <b>Spaß.</b></p>
+	</div>
+	
+	 <div class="wrap">
+		 <i class="icon-rocket mainIcon"></i>
+		 <br>
+		 <span class="iconDes"><q>DIE LIEBSTEN ist echte<br> Raketenwissenschaft</q></span>
+	 </div>
+	<div class="clear"></div>
+ </div>
+ 
+ <div class="wrapper">
+
+	<div class="wrap"> 
+	    <h2 class="indentedForm">Login:</h2>
+	   		 <form name="login" action="/login">
+	   		 	<input type="text" name="name" class="input mainFormInput" placeholder="Benutzername"><br>
+	   		 	<input type="password" name="thePwd"class="input mainFormInput" placeholder="Passwort"><br>
+	   		 	<input type="submit" value="Login" class="button mainFormButton invertedButton"><br>
+	   		 </form>	
+	   		 <br>
+	   		 <a class="normalLink forgotLink" href="/vergessen">Passwort vergessen ?</a>
+	   		 <div id="error1Con" class="hidden">
+		 		<span class="error mainError" id="error1"></span>
+			</div>
+	</div>
+	<div class="wrap">
+		<h2 class="indentedForm">Jetzt gratis registrieren:</h2>
+					 <form action="/new" name="new">
+					 <input type="text" name="name" class="input mainFormInput" placeholder="Benutzername"><br>
+					 <input type="text" name="mail"class="input mainFormInput" placeholder="E-Mail Adresse"><br>
+					 <input type="password" name="pwd1"class="input mainFormInput" placeholder="Passwort"><br>
+					 <input type="password" name="pwd2"class="input mainFormInput" placeholder="Passwort wiederholen"><br>
+					 <input type="submit" value="Registrieren" class="button mainFormButton invertedButton"><br>
+				 </form>
+				<div id="error2Con" class="hidden">
+		 			<span class="error mainError" id="error2"></span>
+			</div>				 
+	</div>
+	<div class="clear"></div>
+	
+ </div>
+
+<script>
+$('form[name=new]').submit(function(){
+	    document.getElementById("error2Con").className = "hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	if(res.error.length==0){ location.reload(); $('body').scrollTop(0);}
+	    document.getElementById("error2").innerHTML = res.error;
+        document.getElementById("error2Con").className = "animated shake";
+    });
+    return false;
+});
+$('form[name=login]').submit(function(){
+    	document.getElementById("error1Con").className = "hidden";
+    $.post($(this).attr('action'), $(this).serialize(), function(res){
+    	if(res.error.length==0) {location.reload(); $('body').scrollTop(0);}
+        document.getElementById("error1").innerHTML = res.error;
+        document.getElementById("error1Con").className = "animated shake";
+    });
+    return false;
+});
+</script>
+
+
+
+
+ <div class="wrapper">
+	 <div class="wrap">
+	 	<i class="icon-magic mainIcon"></i>
+	 	<br>
+	 	<span class="iconDes"><q>DIE LIEBSTEN ist so einfach,<br> es grenzt an Magie.</q></span>
+	 </div>
+	 <div class="wrap">
+		  <h2>Immer noch Fragen ?</h2>
+		 <p>Nachdem du dich registriert hast, kannst du erstmal Listen bis zum umfallen erstellen. Dein Profil oder einzelne Top-Fünf Listen sind dann unter dieliebsten.de für deine Freunde erreichbar. Das ganze sieht dann so aus: <br> <b><a class="indentedLink" href="/von/friedrich">dieliebsten.de/von/friedrich</a><b>
+		 </p>
+	 </div>
+	<div class="clear"></div>
+</div>
+
+
+ <div class="wrapper" >
+	 <div class="wrap">
+	 	<i class="icon-coffee mainIcon smallIcon redIcon"></i><br><i class="icon-heart mainIcon smallIcon redIcon"></i> <span class="iconDes"><p>Eine Mischung aus viel Kaffee und Liebe ergibt so eine tolle Webseite.<br> Geplante Features kann man <a class="normalLink" href="/von/admin/Features%20für%20das%20nächste%20Update">hier</a> bewundern.</p></span>
+	 </div>
+	 <div class="wrap">
+ 	 	<i class="icon-question mainIcon redIcon"></i> <br><span class="iconDes"><p>Bei Fragen, Problemen oder Anregungen einfach eine Mail an <a href="mailto:hallo@dieliebsten.de" class="normalLink">hallo@dieliebsten.de</a>. Außerdem hat die Seite auch ein <a href="/impressum" class="normalLink">Impressum</a>.</p></span>
+	 </div>
+	 <div class="clear"></div>
+</div>
+ 
+
+{% endblock %}

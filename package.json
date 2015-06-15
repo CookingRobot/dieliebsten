@@ -1,0 +1,21 @@
+{
+  "name": "DieLiebsten",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "nodemon -e js,html app.js"
+  },
+  "dependencies": {
+    "express": "3.x",
+    "swig":"*",
+    "consolidate":"*",
+    "mysql":"*",
+     "bcrypt":"*",
+     "nodemailer":"*",
+     "urlsafe-base64":"*",
+     "node-hat":"*"
+  },
+ "devDependencies": {
+    "nodemon":"*"
+ }
+}
