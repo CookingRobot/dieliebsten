@@ -1,4 +1,4 @@
-# (Die Liebsten)[http://cookingrobot.de/posts/dieliebsten]
+# [Die Liebsten](http://cookingrobot.de/posts/dieliebsten)
 
 small social network to create top-five lists; written in <b>Node.js</b> with ♥️
 
