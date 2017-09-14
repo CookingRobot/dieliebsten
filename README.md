@@ -1,14 +1,14 @@
-# [Die Liebsten](http://cookingrobot.de/posts/dieliebsten)
+# Die Liebsten
 
-small social network to create top-five lists; written in <b>Node.js</b> with ‚ô•Ô∏è
+This used to be my first real web app. It was the moment I got into Node.js programming. Out of sentimentality I'm keeping the repo online.
 
 ## Main Features
 
-<img class="fullWidth" src="http://cookingrobot.de/public/dieliebsten_01.png"/>
+<img class="fullWidth" src="screenshots/dieliebsten_01.png"/>
 <br>
 ## Login and register forms
-<img class="fullWidth" src="http://cookingrobot.de/public/dieliebsten_02.png"/>
-<img class="fullWidth" src="http://cookingrobot.de/public/dieliebsten_03.png"/>
+<img class="fullWidth" src="screenshots/dieliebsten_02.png"/>
+<img class="fullWidth" src="screenshots/dieliebsten_03.png"/>
 <br>
 ## Change user specific information
 + change mail
@@ -16,12 +16,12 @@ small social network to create top-five lists; written in <b>Node.js</b> with ‚ô
 + delete account
 + get support mail
 
-<img class="fullWidth" src="http://cookingrobot.de/public/dieliebsten_05.png"/>
+<img class="fullWidth" src="screenshots/dieliebsten_05.png"/>
 <br>
 ## Forgot password
 + sends reactivation link to enter new password
 
-<img class="fullWidth" src="http://cookingrobot.de/public/dieliebsten_07.png"/>
+<img class="fullWidth" src="screenshots/dieliebsten_07.png"/>
 <br>
 ## Dashboard view
 + view news from other users
@@ -30,8 +30,8 @@ small social network to create top-five lists; written in <b>Node.js</b> with ‚ô
 	+ reorder
 	+ delete
 
-<img class="fullWidth" src="http://cookingrobot.de/public/dieliebsten_04.png"/>
+<img class="fullWidth" src="screenshots/dieliebsten_04.png"/>
 <br>
 ## Public view of lists
-<img class="fullWidth" src="http://cookingrobot.de/public/dieliebsten_06.png"/>
+<img class="fullWidth" src="screenshots/dieliebsten_06.png"/>
 
